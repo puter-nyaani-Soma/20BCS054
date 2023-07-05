@@ -47,3 +47,19 @@ app.get('/train/trains',async (req,res) => {
     const response= await axios.get('http://104.211.219.98/train/trains');
     res.send(response.data);
 })
+
+app.get('/train/trains/:id', async (req, res) => {
+  try {
+    const trainId = req.params.id; 
+    // Retrieve the train ID from the URL parameter
+    console.log(trainId);
+
+    const response = await axios.get(`http://104.211.219.98/train/trains/${trainId}`);
+    const trainDetails = response.data;
+
+    res.send(trainDetails);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred');
+  }
+});
